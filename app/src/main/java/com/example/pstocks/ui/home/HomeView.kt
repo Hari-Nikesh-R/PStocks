@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -26,6 +28,7 @@ import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,22 +36,22 @@ import androidx.compose.ui.unit.dp
 import com.example.pstocks.R
 
 
-@Preview
 @Composable
-fun HomeView() {
+fun HomeView(viewModel: HomeViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
-            .padding(24.dp),
+            .padding(24.dp)
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly,
+            horizontalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
                 .fillMaxWidth(1f)
-                .padding(top = 36.dp, start = 12.dp)
+                .padding(top = 36.dp)
         ){
             Image(painterResource(id = R.drawable.wallet),
                 contentScale = ContentScale.Crop,
@@ -64,12 +67,20 @@ fun HomeView() {
                     .fillMaxWidth(0.18f)
                     .aspectRatio(1.0f, matchHeightConstraintsFirst = true),
                 contentDescription = null)
+            Text(
+                modifier = Modifier.padding(12.dp),
+                text = "ALGOPEAR",
+                fontSize = MaterialTheme.typography.h5.fontSize,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                textAlign = TextAlign.Center
+            )
             Image(painterResource(id = R.drawable.notification),
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.Fit,
                 alignment = Alignment.Center,
                 modifier = Modifier
-                    .fillMaxWidth(0.28f)
-                    .aspectRatio(1.0f, matchHeightConstraintsFirst = true),
+                    .fillMaxWidth(0.75f)
+                    .aspectRatio(1f, matchHeightConstraintsFirst = true),
                 contentDescription = null)
         }
         Spacer(modifier = Modifier.height(32.dp))
@@ -120,7 +131,9 @@ fun HomeView() {
                         alignment = Alignment.Center,
                         modifier = Modifier
                             .fillMaxWidth(0.2f)
-                            .aspectRatio(1.0f, matchHeightConstraintsFirst = true).padding(start = 12.dp).padding(vertical = 4.dp),
+                            .aspectRatio(1.0f, matchHeightConstraintsFirst = true)
+                            .padding(start = 12.dp)
+                            .padding(vertical = 4.dp),
                         contentDescription = null)
                     Column(modifier = Modifier.padding(8.dp)) {
                         Text(
@@ -143,7 +156,9 @@ fun HomeView() {
                         alignment = Alignment.Center,
                         modifier = Modifier
                             .fillMaxWidth(0.4f)
-                            .aspectRatio(1.0f, matchHeightConstraintsFirst = true).padding(start = 12.dp).padding(vertical = 4.dp),
+                            .aspectRatio(1.0f, matchHeightConstraintsFirst = true)
+                            .padding(start = 12.dp)
+                            .padding(vertical = 4.dp),
                         contentDescription = null)
                     Column(modifier = Modifier.padding(8.dp)) {
                         Text(
@@ -163,6 +178,18 @@ fun HomeView() {
                     }
                 }
             }
+
+        // todo: Change this image to dynamic graph
+        Image(painterResource(id = R.drawable.ic_home_graph),
+            contentScale = ContentScale.Fit,
+            alignment = Alignment.Center,
+            modifier = Modifier
+                .fillMaxWidth(1f)
+                .padding(vertical = 32.dp)
+                .aspectRatio(1f, matchHeightConstraintsFirst = false),
+            contentDescription = null)
+//        CombinedLinechartWithBackground()
+
 
     }
 }

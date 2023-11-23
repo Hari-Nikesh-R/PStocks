@@ -58,7 +58,7 @@ import com.example.pstocks.ui.theme.ThemeYellow
 fun BottomNavigationGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = BottomBarScreen.Home.route) {
         composable(route = BottomBarScreen.Home.route) {
-            HomeView()
+            HomeView(hiltViewModel())
         }
         composable(route = BottomBarScreen.Algo.route) {
             AlgoView(hiltViewModel())
