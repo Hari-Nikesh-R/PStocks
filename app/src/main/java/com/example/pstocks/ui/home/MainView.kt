@@ -1,38 +1,33 @@
 package com.example.pstocks.ui.home
 
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import android.se.omapi.Session
 import androidx.compose.material.FabPosition
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.pstocks.utils.BottomBar
-import com.example.pstocks.utils.BottomNavigationGraph
-import com.example.pstocks.utils.CustomFloatingActionButton
+import com.example.pstocks.ui.base.BottomBar
+import com.example.pstocks.ui.base.BottomNavigationGraph
+import com.example.pstocks.ui.base.CustomBottomBar
+import com.example.pstocks.ui.base.CustomFloatingActionButton
+import com.example.pstocks.utils.Sessions
+import com.example.pstocks.utils.Sessions.defaultBottomBarNeeded
 
 @Composable
 fun MainView() {
     val navController =  rememberNavController()
+    Navigation(navController = navController)
+    PopBack(navController = navController)
     Scaffold (
         floatingActionButton = { CustomFloatingActionButton() },
         floatingActionButtonPosition = FabPosition.Center,
         isFloatingActionButtonDocked = true,
         bottomBar = {
-                BottomBar(navController = navController)
+           if(defaultBottomBarNeeded)
+                BottomBar(navController = navController) else CustomBottomBar()
         }) {
         it.calculateBottomPadding()
         Surface {
@@ -40,5 +35,25 @@ fun MainView() {
         }
     }
 
+}
+
+@Composable
+fun Navigation(navController: NavHostController) {
+    LaunchedEffect(Unit)
+    {
+        Sessions.navigation.collect { route ->
+            navController.navigate(route)
+        }
+    }
+}
+
+@Composable fun PopBack(navController: NavHostController) {
+    LaunchedEffect(Unit) {
+        Sessions.moveBack.collect { isBackAction ->
+            if (isBackAction) {
+                navController.navigateUp()
+            }
+        }
+    }
 }
 

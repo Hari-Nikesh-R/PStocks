@@ -2,6 +2,7 @@ package com.example.pstocks.ui.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,6 +35,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pstocks.R
+import com.example.pstocks.ui.base.Screen
+import com.example.pstocks.ui.wallet.WalletView
+import com.example.pstocks.utils.Sessions
 
 
 @Composable
@@ -53,12 +57,16 @@ fun HomeView(viewModel: HomeViewModel) {
                 .fillMaxWidth(1f)
                 .padding(top = 36.dp)
         ){
+
             Image(painterResource(id = R.drawable.wallet),
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
                 modifier = Modifier
                     .fillMaxWidth(0.18f)
-                    .aspectRatio(1.0f, matchHeightConstraintsFirst = true),
+                    .aspectRatio(1.0f, matchHeightConstraintsFirst = true)
+                    .clickable {
+                        viewModel.navigateToOtherPages(Screen.WalletScreen.route)
+                    },
                 contentDescription = null)
             Image(painterResource(id = R.drawable.wallet),
                 contentScale = ContentScale.Crop,
