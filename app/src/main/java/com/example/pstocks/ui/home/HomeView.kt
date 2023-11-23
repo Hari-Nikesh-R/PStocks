@@ -111,7 +111,7 @@ fun HomeView() {
                 modifier = Modifier
                     .size(400.dp, 64.dp)
                     .clip(RoundedCornerShape(32.dp))
-                    .background(Color.Yellow),
+                    .background(Color.DarkGray),
             ) {
                 Row(modifier = Modifier
                     .fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -134,7 +134,7 @@ fun HomeView() {
                             text = "$17,547.99",
                             fontSize = MaterialTheme.typography.body2.fontSize,
                             fontWeight = FontWeight.Light,
-                            color = Color.Gray,
+                            color = Color.White,
                             textAlign = TextAlign.Center
                         )
                     }
@@ -157,7 +157,7 @@ fun HomeView() {
                             text = "+$15,310.39",
                             fontSize = MaterialTheme.typography.body2.fontSize,
                             fontWeight = FontWeight.Light,
-                            color = Color.Gray,
+                            color = Color.White,
                             textAlign = TextAlign.Center
                         )
                     }
